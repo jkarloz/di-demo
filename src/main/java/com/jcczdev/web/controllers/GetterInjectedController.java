@@ -1,6 +1,7 @@
 package com.jcczdev.web.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 
 import com.jcczdev.web.services.GreetingService;
@@ -18,7 +19,8 @@ public class GetterInjectedController {
 	}
 	
 	@Autowired
-	public void setGreetingService(GreetingService greetingService) {
+	//@Qualifier("getterGreetingService") can be declared here
+	public void setGreetingService(@Qualifier("getterGreetingService") GreetingService greetingService) {
 		this.greetingService = greetingService;
 	}
 

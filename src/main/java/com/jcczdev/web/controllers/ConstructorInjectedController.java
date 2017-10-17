@@ -1,5 +1,6 @@
 package com.jcczdev.web.controllers;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 
 import com.jcczdev.web.services.GreetingService;
@@ -13,7 +14,8 @@ public class ConstructorInjectedController {
 	
 	private GreetingService greetingService;
 	
-	public ConstructorInjectedController(GreetingService greetingService) {
+	
+	public ConstructorInjectedController(@Qualifier("constructorGreetingService")GreetingService greetingService) {
 		this.greetingService = greetingService;
 	}
 	
