@@ -9,13 +9,14 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.env.Environment;
 
 import com.jcczdev.web.examplebeans.FakeDataSource;
+import com.jcczdev.web.examplebeans.FakeJmsBroker;
 
 /**
  * @author Juan Carlos - 2017/10/25
  *
  */
 @Configuration
-@PropertySource("classpath:datasource.properties")
+@PropertySource({"classpath:datasource.properties", "classpath:jms.properties"})
 public class PropertyConfig {
 	
 	@Autowired
@@ -28,6 +29,13 @@ public class PropertyConfig {
 	@Value("${guru.dburl}")
 	String url;
 	
+	@Value("${guru.jms.username}")
+	String jmsUsername;
+	@Value("${guru.jms.password}")
+	String jmsPassword;
+	@Value("${guru.jms.url}")
+	String jmsURL;
+	
 	@Bean
 	public FakeDataSource fakeDataSource() {
 		FakeDataSource fakeDataSource = new FakeDataSource();
@@ -35,6 +43,15 @@ public class PropertyConfig {
 		fakeDataSource.setPassword(pass);
 		fakeDataSource.setUrl(url);		
 		return fakeDataSource;
+	}
+	
+	@Bean
+	public FakeJmsBroker fakeJmsBroker() {
+		FakeJmsBroker jmsBroker = new FakeJmsBroker();
+		jmsBroker.setUsername(jmsUsername);
+		jmsBroker.setPassword(jmsPassword);
+		jmsBroker.setUrl(jmsURL);
+		return jmsBroker;
 	}
 	
 	@Bean
